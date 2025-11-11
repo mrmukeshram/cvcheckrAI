@@ -58,29 +58,30 @@ const ModernResumeBuilder: React.FC<BuildingResumeViewProps> = ({ onBack, isLoad
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <div className="relative w-full max-w-md">
-        {/* Optimized floating particles - reduced from 15 to 6 for better performance */}
-        {[...Array(6)].map((_, i) => (
+      <div className="relative w-full max-w-md will-change-auto">
+        {/* Optimized floating particles - reduced from 15 to 3 for better performance */}
+        {[...Array(3)].map((_, i) => (
           <motion.div
             key={`particle-${i}-${currentStep}`}
             className="absolute rounded-full"
             style={{
-              width: `${6 + i * 2}px`,
-              height: `${6 + i * 2}px`,
+              width: `${8 + i * 3}px`,
+              height: `${8 + i * 3}px`,
               background: `linear-gradient(45deg, ${currentStepData?.color}, ${BUILD_STEPS[(currentStep + 1) % BUILD_STEPS.length]?.color || currentStepData?.color})`,
-              left: `${20 + i * 15}%`,
-              top: `${20 + (i % 2) * 40}%`,
-              opacity: 0.4,
+              left: `${25 + i * 20}%`,
+              top: `${25 + (i % 2) * 30}%`,
+              opacity: 0.3,
+              willChange: "transform, scale",
             }}
             animate={{
-              y: [0, -15, 0],
-              scale: [1, 1.2, 1],
+              y: [0, -10, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: 4 + i,
+              duration: 3 + i * 0.5,
               repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut"
+              delay: i * 0.2,
+              ease: "easeInOut",
             }}
           />
         ))}
@@ -123,7 +124,7 @@ const ModernResumeBuilder: React.FC<BuildingResumeViewProps> = ({ onBack, isLoad
               {/* Center content */}
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <motion.div
-                  key={currentStep}
+                  key={`icon-${currentStep}`}
                   className="mb-2"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -134,10 +135,10 @@ const ModernResumeBuilder: React.FC<BuildingResumeViewProps> = ({ onBack, isLoad
                     style: { color: currentStepData.color }
                   })}
                 </motion.div>
-                
+
                 <motion.div
                   className="text-center"
-                  key={Math.round(progress)}
+                  key={`progress-${Math.round(progress)}`}
                   initial={{ opacity: 0.5 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
@@ -230,19 +231,22 @@ const ModernResumeBuilder: React.FC<BuildingResumeViewProps> = ({ onBack, isLoad
         {/* Optimized floating accent shapes */}
         {/* Live processing indicator */}
         <motion.div
-          className="absolute -top-6 -right-6 w-20 h-20 rounded-full opacity-20"
-          style={{ backgroundColor: currentStepData?.color }}
+          className="absolute -top-6 -right-6 w-16 h-16 rounded-full opacity-15"
+          style={{
+            backgroundColor: currentStepData?.color,
+            willChange: "transform",
+          }}
           animate={{
-            scale: [1, 1.1, 1],
+            scale: [1, 1.05, 1],
           }}
           transition={{
-            duration: 3,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         />
 
-        {/* Simplified processing dots */}
+        {/* Simplified processing dots - optimized for performance */}
         <motion.div
           className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2"
           initial={{ opacity: 0 }}
@@ -251,16 +255,19 @@ const ModernResumeBuilder: React.FC<BuildingResumeViewProps> = ({ onBack, isLoad
         >
           {[0, 1, 2].map((i) => (
             <motion.div
-              key={i}
+              key={`dot-${i}-${currentStep}`}
               className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: currentStepData?.color }}
+              style={{
+                backgroundColor: currentStepData?.color,
+                willChange: "transform",
+              }}
               animate={{
-                scale: [1, 1.3, 1],
+                scale: [1, 1.2, 1],
               }}
               transition={{
-                duration: 2,
+                duration: 1.5,
                 repeat: Infinity,
-                delay: i * 0.3,
+                delay: i * 0.2,
                 ease: "easeInOut"
               }}
             />

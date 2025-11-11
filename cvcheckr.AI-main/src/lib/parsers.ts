@@ -1,7 +1,5 @@
 
-import mammoth from 'mammoth';
 import * as pdfjsLib from 'pdfjs-dist';
-import { createWorker } from 'tesseract.js';
 
 // The pdf.js worker was failing to load from a CDN. We now import it directly
 // from the installed package. Vite's `?url` suffix provides a stable URL to the worker file.
@@ -34,6 +32,7 @@ const pdfPageToCanvas = async (page: any): Promise<HTMLCanvasElement> => {
 const extractTextFromPDFPageWithOCR = async (page: any): Promise<string> => {
   try {
     const canvas = await pdfPageToCanvas(page);
+    const { createWorker } = await import('tesseract.js');
     const worker = await createWorker('eng'); // English language model
 
     const { data: { text } } = await worker.recognize(canvas);
@@ -194,6 +193,7 @@ export const extractTextFromFile = async (file: File): Promise<string> => {
   }
         } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
           try {
+            const { default: mammoth } = await import('mammoth');
             const result = await mammoth.extractRawText({ arrayBuffer });
             const trimmedText = result.value.trim();
             if (trimmedText.length === 0) {

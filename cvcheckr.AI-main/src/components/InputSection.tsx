@@ -161,27 +161,6 @@ const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isLoading }) => 
 
   return (
     <>
-      <style>
-        {`
-          @media (min-width: 640px) {
-            .responsive-button {
-              background: var(--bg-desktop) !important;
-              box-shadow: var(--shadow-desktop) !important;
-            }
-          }
-
-          @media (max-width: 639px) {
-            .file-upload-container {
-              width: 100% !important;
-              max-width: none !important;
-            }
-            .file-name-container {
-              width: 100% !important;
-              padding: 0.75rem !important;
-            }
-          }
-        `}
-      </style>
       <div className="w-full max-w-5xl mx-auto animate-fade-in space-y-8">
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full">
@@ -256,7 +235,7 @@ const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isLoading }) => 
               placeholder="Or paste your resume content here..."
               value={resumeText}
               onChange={(e) => setResumeText(e.target.value)}
-              className="min-h-[120px] sm:min-h-[160px] bg-gray-50 border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 rounded-xl resize-none"
+              className="min-h-[120px] sm:min-h-[160px] bg-gray-50 border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 rounded-xl resize-none will-change-auto"
             />
             {parseError && <p className="text-sm text-red-600 mt-2">{parseError}</p>}
           </ModernCard>
@@ -278,7 +257,7 @@ const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isLoading }) => 
               placeholder="Paste the complete job description here..."
               value={jobDescText}
               onChange={(e) => setJobDescText(e.target.value)}
-              className="min-h-[160px] sm:min-h-[200px] bg-gray-50 border-gray-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 rounded-xl resize-none"
+              className="min-h-[160px] sm:min-h-[200px] bg-gray-50 border-gray-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 rounded-xl resize-none will-change-auto"
             />
           </ModernCard>
         </div>
